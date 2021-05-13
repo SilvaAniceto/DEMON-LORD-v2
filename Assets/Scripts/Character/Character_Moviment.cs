@@ -29,15 +29,18 @@ public class Character_Moviment : MonoBehaviour
     float slideTimer;
 
     Rigidbody2D rb;
-
+    Animator anim;
     void Awake() {
-        rb = GetComponent<Rigidbody2D>();
+        rb = this.GetComponent<Rigidbody2D>();
+        anim = this.GetComponent<Animator>();
         slideTimer = slideTime;
     }
     void Update() {
-        CheckRaycasts();
-
         moveInput = Input.GetAxisRaw("Horizontal");
+
+        CheckRaycasts();
+        AnimationSet();
+
         if (moveInput != 0 && !wallSliding)
             Move();
 
@@ -100,6 +103,31 @@ public class Character_Moviment : MonoBehaviour
     void WallJump() {
         rb.AddForce(new Vector2(wallJumpForce * -facingSide.x, jumpForce),ForceMode2D.Impulse);
         Flip();        
+    }
+
+    void AnimationSet()
+    {
+        if (moveInput != 0 && !wallSliding)
+            anim.SetBool("Walk", true);
+        else
+            anim.SetBool("Walk", false);
+
+        if (!grounded && rb.velocity.y > 0.02f)
+            anim.SetBool("Jump", true);
+        else
+            anim.SetBool("Jump", false);
+
+        if (!grounded && rb.velocity.y < -0.02f)
+            anim.SetBool("Fall", true);
+        else
+            anim.SetBool("Fall", false);
+
+        if (wallSliding)
+            anim.SetBool("WallSlide", true);
+        else
+            anim.SetBool("WallSlide", false);
+
+
     }
     void OnDrawGizmos() {
         Gizmos.DrawLine(transform.position, new Vector3(transform.position.x + wallRaySize * facingSide.x, transform.position.y,transform.position.z));
