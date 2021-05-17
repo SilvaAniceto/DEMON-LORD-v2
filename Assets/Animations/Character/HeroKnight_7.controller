@@ -130,6 +130,18 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-6219574655563738113
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0982c0505e49554e8e8dd8405f9c829, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1102 &-5586455180086193846
 AnimatorState:
   serializedVersion: 6
@@ -138,10 +150,11 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Attack C
-  m_Speed: 0.25
+  m_Speed: 0.2
   m_CycleOffset: 0
   m_Transitions: []
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -6219574655563738113}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -156,6 +169,18 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-4858512126804260630
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d93bffc95b60b042a99f236c73de112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1102 &-2766388353082191312
 AnimatorState:
   serializedVersion: 6
@@ -190,10 +215,11 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Attack B
-  m_Speed: 0.25
+  m_Speed: 0.2
   m_CycleOffset: 0
   m_Transitions: []
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -4858512126804260630}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -247,13 +273,13 @@ AnimatorStateMachine:
     m_Position: {x: -210, y: 760, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1779721897503615934}
-    m_Position: {x: 30, y: 660, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -1433790571718265495}
     m_Position: {x: 30, y: 710, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -5586455180086193846}
+    m_State: {fileID: -1433790571718265495}
     m_Position: {x: 30, y: 760, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -5586455180086193846}
+    m_Position: {x: 30, y: 810, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7411762157097341046}
     m_Position: {x: -210, y: 810, z: 0}
@@ -262,19 +288,19 @@ AnimatorStateMachine:
     m_Position: {x: -210, y: 860, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2005761664929461218}
-    m_Position: {x: 280, y: 780, z: 0}
+    m_Position: {x: 260, y: 860, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5682823137040997082}
-    m_Position: {x: 280, y: 830, z: 0}
+    m_Position: {x: 260, y: 910, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7611291888369894334}
-    m_Position: {x: 30, y: 860, z: 0}
+    m_Position: {x: 260, y: 710, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7065191308322356443}
-    m_Position: {x: 30, y: 910, z: 0}
+    m_Position: {x: 260, y: 760, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 573507280993024381}
-    m_Position: {x: 30, y: 960, z: 0}
+    m_Position: {x: 30, y: 910, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4897802054308264910}
     m_Position: {x: -210, y: 910, z: 0}
@@ -322,10 +348,11 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Attack A
-  m_Speed: 0.25
+  m_Speed: 0.2
   m_CycleOffset: 0
   m_Transitions: []
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 5292275749694493886}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -392,6 +419,18 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &5292275749694493886
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70ae226bb4ecd7548a8764cad9361030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1102 &5682823137040997082
 AnimatorState:
   serializedVersion: 6

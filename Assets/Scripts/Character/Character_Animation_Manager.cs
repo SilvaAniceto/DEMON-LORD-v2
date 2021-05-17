@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Character_Animation_Manager : MonoBehaviour
 {
+    public static Character_Animation_Manager animInstance;
+
     Rigidbody2D rb;
     Animator animator;
     private string currentState;
@@ -14,6 +16,10 @@ public class Character_Animation_Manager : MonoBehaviour
     const string FALL = "Fall";
     const string WALLSLIDE = "Wallslide";
 
+    void Awake()
+    {
+        animInstance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -24,29 +30,30 @@ public class Character_Animation_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Character_Moviment.moveInstance.grounded)
+        if (!Character_Combat.combInstance.isAttacking)
         {
-            if (Character_Moviment.moveInstance.moveInput != 0 && !Character_Moviment.moveInstance.wallSliding)
-                ChangeAnimationState(WALK);
+            if (Character_Moviment.moveInstance.grounded)
+            {
+                if (Character_Moviment.moveInstance.moveInput != 0 && !Character_Moviment.moveInstance.wallSliding)
+                    ChangeAnimationState(WALK);
+                else
+                    ChangeAnimationState(IDLE);
+            }
             else
-                ChangeAnimationState(IDLE);
+            {
+                if (Character_Moviment.moveInstance.wallSliding)
+                    ChangeAnimationState(WALLSLIDE);
+                else if (rb.velocity.y > 0.2f)
+                    ChangeAnimationState(JUMP);
+                else if (rb.velocity.y < 0.2f)
+                    ChangeAnimationState(FALL);
+                else
+                    return;
+            }
         }
-        else
-        {
-            if (Character_Moviment.moveInstance.wallSliding)
-                ChangeAnimationState(WALLSLIDE);
-            else if (rb.velocity.y > 0.2f)
-                ChangeAnimationState(JUMP);
-            else if (rb.velocity.y < 0.2f)
-                ChangeAnimationState(FALL);
-            else
-                return;
-        }
-
-
     }
 
-    void ChangeAnimationState(string newState)
+    public void ChangeAnimationState(string newState)
     {
         if (currentState == newState)
             return;

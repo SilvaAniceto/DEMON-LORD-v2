@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 476676714}
   - component: {fileID: 476676713}
   - component: {fileID: 476676717}
+  - component: {fileID: 476676718}
   m_Layer: 0
   m_Name: Hero Knight
   m_TagString: Player
@@ -290,7 +291,7 @@ SpriteRenderer:
   m_SortingLayerID: 854795557
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -8388972923550342200, guid: ae615d2938bc6ff43b5b6e15d02090bb, type: 3}
+  m_Sprite: {fileID: -7357797988063737743, guid: ae615d2938bc6ff43b5b6e15d02090bb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -378,10 +379,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -1.09}
+  m_Offset: {x: -0.35, y: -1.09}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.56, y: 0.5}
     oldSize: {x: 6.25, y: 3.4375}
     newSize: {x: 6.25, y: 3.4375}
     adaptiveTilingThreshold: 0.5
@@ -404,7 +405,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.33, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
 --- !u!114 &476676717
@@ -419,6 +420,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b8992fa18c94664985ad2690de8a027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &476676718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476676709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4961b078ae3c6946871e9c6be16436d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canAttack: 0
+  isAttacking: 0
 --- !u!1 &487413328
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,7 +800,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.1771173, y: 2.196203, z: -10}
+  m_LocalPosition: {x: -5.535327, y: 2.1977909, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1292209632}

@@ -45,11 +45,14 @@ public class Character_Moviment : MonoBehaviour
 
         CheckRaycasts();
 
-        if (moveInput != 0 && !wallSliding)
-            Move();
+        if (!Character_Combat.combInstance.isAttacking)
+        {
+            if (moveInput != 0 && !wallSliding)
+                Move();
 
-        if (Input.GetButtonDown("Jump") && grounded && !wallSliding)
-            Jump();
+            if (Input.GetButtonDown("Jump") && grounded && !wallSliding)
+                Jump();
+        }
 
         if (Input.GetButtonDown("Jump") && !grounded && wallSliding)
             WallJump();
