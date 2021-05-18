@@ -8,8 +8,12 @@ public class Character_Combat : MonoBehaviour
 
     public bool canAttack;
     public bool isAttacking;
+    public CircleCollider2D attackHitBox;
 
-    Animator anim;
+    public bool isBlocking;
+
+    const string ATTACK_A = "Attack A";
+    const string BLOCKING = "Blocking";
 
     void Awake()
     {
@@ -18,8 +22,9 @@ public class Character_Combat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = this.GetComponent<Animator>();
+        isBlocking = false;
         canAttack = true;
+        attackHitBox.enabled = false;
     }
 
     // Update is called once per frame
@@ -29,15 +34,21 @@ public class Character_Combat : MonoBehaviour
         {
             if (Input.GetButtonDown("Attack"))
             {
-                if (!isAttacking) 
-                { 
-                    Character_Animation_Manager.animInstance.ChangeAnimationState("Attack A");
+                if (!isAttacking)
+                {
+                    Character_Animation_Manager.animInstance.ChangeAnimationState(ATTACK_A);
                     canAttack = false;
                     isAttacking = true;
                 }
             }
-            else
-                return;
+
+            if (Input.GetButtonDown("Block"))
+            {
+                isBlocking = true;
+                Character_Animation_Manager.animInstance.ChangeAnimationState(BLOCKING);
+            }
+
         }
+
     }
 }

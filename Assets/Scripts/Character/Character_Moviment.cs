@@ -31,12 +31,11 @@ public class Character_Moviment : MonoBehaviour
     float slideTimer;
 
     Rigidbody2D rb;
-    Animator anim;
+
     void Awake()
     {
         moveInstance = this;
         rb = this.GetComponent<Rigidbody2D>();
-        anim = this.GetComponent<Animator>();
         slideTimer = slideTime;
     }
     void Update()
@@ -45,7 +44,7 @@ public class Character_Moviment : MonoBehaviour
 
         CheckRaycasts();
 
-        if (!Character_Combat.combInstance.isAttacking)
+        if (!Character_Combat.combInstance.isAttacking && !Character_Combat.combInstance.isBlocking)
         {
             if (moveInput != 0 && !wallSliding)
                 Move();

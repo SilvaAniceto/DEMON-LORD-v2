@@ -20,6 +20,7 @@ public class Character_Animation_Manager : MonoBehaviour
     {
         animInstance = this;
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +31,7 @@ public class Character_Animation_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!Character_Combat.combInstance.isAttacking)
+        if (!Character_Combat.combInstance.isAttacking && !Character_Combat.combInstance.isBlocking)
         {
             if (Character_Moviment.moveInstance.grounded)
             {
