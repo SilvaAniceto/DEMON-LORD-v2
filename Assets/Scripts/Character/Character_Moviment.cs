@@ -13,7 +13,7 @@ public class Character_Moviment : MonoBehaviour
     float groundAngle;
     bool isFlip = false;
     Vector2 moveDirection;
-    Vector2 facingSide = new Vector2(1, 0);
+    public Vector2 facingSide = new Vector2(1, 0);
 
     [Header("Jump")]
     [SerializeField] float jumpForce;
@@ -44,7 +44,7 @@ public class Character_Moviment : MonoBehaviour
 
         CheckRaycasts();
 
-        if (!Character_Combat.combInstance.isAttacking && !Character_Combat.combInstance.isBlocking)
+        if (!Character_Combat.combInstance.isAttacking && !Character_Combat.combInstance.isBlocking && !Character_Combat.combInstance.isRolling)
         {
             if (moveInput != 0 && !wallSliding)
                 Move();
