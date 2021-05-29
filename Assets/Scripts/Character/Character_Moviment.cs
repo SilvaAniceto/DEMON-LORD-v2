@@ -42,9 +42,9 @@ public class Character_Moviment : MonoBehaviour
     {
         moveInput = Input.GetAxisRaw("Horizontal");
 
-        CheckRaycasts();
+        CheckRayCasts();
 
-        if (!Character_Combat.combInstance.isAttacking && !Character_Combat.combInstance.isBlocking && !Character_Combat.combInstance.isRolling)
+        if (!Character_Combat.combInstance.isAttacking && !Character_Combat.combInstance.isBlocking && !Character_Combat.combInstance.isRolling && !Character_Health_Manager.health.isHit)
         {
             if (moveInput != 0 && !wallSliding)
                 Move();
@@ -63,7 +63,7 @@ public class Character_Moviment : MonoBehaviour
         }
     }
 
-    void CheckRaycasts()
+    void CheckRayCasts()
     {
         RaycastHit2D hitGround = Physics2D.Raycast(transform.position, Vector2.down, groundRaySize, whatIsGround);
 

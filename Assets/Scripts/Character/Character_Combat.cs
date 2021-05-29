@@ -9,7 +9,7 @@ public class Character_Combat : MonoBehaviour
     public bool canAttack;
     public bool isAttacking;
     public CircleCollider2D attackHitBox;
-    public CircleCollider2D upperBody;
+    public CapsuleCollider2D upperBody;
 
     public bool isBlocking;
     public bool isRolling;

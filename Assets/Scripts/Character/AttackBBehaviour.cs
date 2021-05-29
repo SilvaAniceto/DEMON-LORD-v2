@@ -9,6 +9,7 @@ public class AttackBBehaviour : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         timer = stateInfo.length;
+        Character_Combat.combInstance.attackHitBox.enabled = true;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -18,9 +19,12 @@ public class AttackBBehaviour : StateMachineBehaviour
 
         if (timer <= stateInfo.length * 50 / 100)
             Character_Combat.combInstance.canAttack = true;
-        
+
         if (timer <= 0)
+        {
             Character_Combat.combInstance.isAttacking = false;
+            Character_Combat.combInstance.attackHitBox.enabled = false;
+        }
 
 
         if (Character_Combat.combInstance.canAttack)
