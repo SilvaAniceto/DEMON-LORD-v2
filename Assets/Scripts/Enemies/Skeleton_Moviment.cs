@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Moviment : MonoBehaviour
+public class Skeleton_Moviment : MonoBehaviour
 {
-    enum Moviment { Patrol, Chase, Patrol_and_Chase };
+    enum Moviment { Patrol, Guard };
 
     [Header("Moviment")]
     [SerializeField] Moviment movimentType;
@@ -37,12 +37,8 @@ public class Enemy_Moviment : MonoBehaviour
     {
         CheckRayCasts();
 
-        if (movimentType == Moviment.Patrol)
-            Patrol();
-        else if (movimentType == Moviment.Chase)
-            Chase();
-        else if (movimentType == Moviment.Patrol_and_Chase)
-            PatrolAndChase();
+       
+
 
     }
 
@@ -59,33 +55,17 @@ public class Enemy_Moviment : MonoBehaviour
 
     void Patrol()
     {
-        if (hitGround.collider != null)
-            rb.velocity = new Vector2(movespeed, rb.velocity.y);
-        else
-            Flip();
+        
     }
 
     void Chase()
-    {        
-        if (sight.collider != null)
-        {
-            if (hitGround.collider == null)
-                return;
-            else
-                rb.velocity = new Vector2(movespeed, rb.velocity.y);
-        }
-        else if (backSight.collider != null)
-            Flip();        
+    {
+        
     }
 
-    void PatrolAndChase()
+    void Guard()
     {
-        if (sight.collider != null)
-            rb.velocity = new Vector2(movespeed, rb.velocity.y);
-        else if (backSight.collider != null)
-            Flip();
-        else
-            Patrol();
+        
     }
 
     void Flip()

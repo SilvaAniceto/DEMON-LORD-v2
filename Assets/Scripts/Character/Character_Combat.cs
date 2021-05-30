@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character_Combat : MonoBehaviour
-{
+public class Character_Combat : MonoBehaviour {
     public static Character_Combat combInstance;
 
     public bool canAttack;
@@ -22,13 +21,11 @@ public class Character_Combat : MonoBehaviour
 
     Rigidbody2D rb;
 
-    void Awake()
-    {
+    void Awake() {
         combInstance = this;
     }
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         isRolling = false;
         isBlocking = false;
         canAttack = true;
@@ -36,34 +33,26 @@ public class Character_Combat : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (Character_Moviment.moveInstance.grounded)
-        {
-            if (Input.GetButtonDown("Attack"))
-            {
-                if (!isAttacking)
-                {
+    void Update() {
+        if (Character_Moviment.moveInstance.grounded) {
+            if (Input.GetButtonDown("Attack")) {
+                if (!isAttacking) {
                     Character_Animation_Manager.animInstance.ChangeAnimationState(ATTACK_A);
                     canAttack = false;
                     isAttacking = true;
                 }
             }
 
-            if (Input.GetButtonDown("Block"))
-            {
-                if (!isBlocking)
-                {
+            if (Input.GetButtonDown("Block")) {
+                if (!isBlocking) {
                     isBlocking = true;
                     isAttacking = false;
                     Character_Animation_Manager.animInstance.ChangeAnimationState(BLOCKING);
                 }
             }
 
-            if (Input.GetButtonDown("Roll"))
-            {
-                if (!isRolling)
-                {
+            if (Input.GetButtonDown("Roll")) {
+                if (!isRolling) {
                     isRolling = true;
                     isAttacking = false;
                     upperBody.enabled = false;
@@ -78,11 +67,9 @@ public class Character_Combat : MonoBehaviour
         Collider2D[] hit = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, whatIsEnemy);
         foreach (Collider2D e in hit) {
             if (hit != null) {
-                Debug.Log("ACERTOU!");
+                Enemy_Health_Manager.enemyHealth.EnemyHealthManagement(1);
             }
-            else {
-                Debug.Log("NÃO ACERTOU!");
-            }
+
         }
     }
 
