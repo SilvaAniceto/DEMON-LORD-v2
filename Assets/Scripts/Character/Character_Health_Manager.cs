@@ -31,20 +31,27 @@ public class Character_Health_Manager : MonoBehaviour
         
     }
 
-    public void HealthManagement(float damage)
-    {
+    public void HealthManagement(float damage) {
         if (Character_Combat.combInstance.isBlocking)
             Character_Animation_Manager.animInstance.ChangeAnimationState(BLOCKED);
-        else
-        {
+        else {
             isHit = true;
-            Character_Animation_Manager.animInstance.ChangeAnimationState(HIT);
-            currentHealth -= damage;
+            if (currentHealth > 0) {
+                Character_Animation_Manager.animInstance.ChangeAnimationState(HIT);
+                currentHealth -= damage;
+            }
+            else if (currentHealth <= 0) {
+                Death();
+            }
         }
     }
 
-    void Death()
-    {
+    void Death() {
         Character_Animation_Manager.animInstance.ChangeAnimationState(DEATH);
+        this.enabled = false;
+        Physics2D.IgnoreLayerCollision(3, 8, true);
+        Character_Moviment.moveInstance.enabled = false;
+        Character_Combat.combInstance.enabled = false;
+        Character_Animation_Manager.animInstance.enabled = false;
     }
 }

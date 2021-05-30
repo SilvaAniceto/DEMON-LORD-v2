@@ -482,8 +482,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canAttack: 0
   isAttacking: 0
-  attackHitBox: {fileID: 776323616}
-  upperBody: {fileID: 0}
+  upperBody: {fileID: 476676716}
+  attackRange: 1.3
+  attackPoint: {fileID: 776323617}
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 256
   isBlocking: 0
   isRolling: 0
 --- !u!1 &487413328
@@ -5840,30 +5844,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 776323617}
-  - component: {fileID: 776323616}
   m_Layer: 3
-  m_Name: Attack Hit Box
+  m_Name: Attack Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!58 &776323616
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 776323615}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1
 --- !u!4 &776323617
 Transform:
   m_ObjectHideFlags: 0

@@ -8,8 +8,10 @@ public class Character_Combat : MonoBehaviour
 
     public bool canAttack;
     public bool isAttacking;
-    public CircleCollider2D attackHitBox;
     public CapsuleCollider2D upperBody;
+    [SerializeField] float attackRange;
+    [SerializeField] Transform attackPoint;
+    [SerializeField] LayerMask whatIsEnemy;
 
     public bool isBlocking;
     public bool isRolling;
@@ -30,7 +32,6 @@ public class Character_Combat : MonoBehaviour
         isRolling = false;
         isBlocking = false;
         canAttack = true;
-        attackHitBox.enabled = false;
         rb = this.GetComponent<Rigidbody2D>();
     }
 
@@ -71,5 +72,21 @@ public class Character_Combat : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void DealDamage() {
+        Collider2D[] hit = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, whatIsEnemy);
+        foreach (Collider2D e in hit) {
+            if (hit != null) {
+                Debug.Log("ACERTOU!");
+            }
+            else {
+                Debug.Log("NÃO ACERTOU!");
+            }
+        }
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
