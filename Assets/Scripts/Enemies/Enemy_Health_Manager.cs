@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Health_Manager : MonoBehaviour
-{
+public class Enemy_Health_Manager : MonoBehaviour {
     public static Enemy_Health_Manager enemyHealth;
 
     [SerializeField] float maxHealth;
@@ -20,14 +19,13 @@ public class Enemy_Health_Manager : MonoBehaviour
         enemyHealth = this;
     }
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         currentHealth = maxHealth;
     }
 
     public void EnemyHealthManagement(float damage) {
         isHit = true;
-        if(currentHealth > 0) {
+        if (currentHealth > 0) {
             anim.Play(HIT);
             currentHealth -= damage;
         }

@@ -59,15 +59,15 @@ public class Slime_Behaviour : MonoBehaviour {
         transform.Rotate(0, 180, 0);
     }
 
-    void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.tag == "Player") {
+    public void AttackDamage() {
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, attackRange, whatIsPlayer);
+        if (hit != null) {
             Character_Health_Manager.health.HealthManagement(1);
         }
     }
 
-    public void AttackDamage() {
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, attackRange, whatIsPlayer);
-        if (hit != null) {
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.tag == "Player") {
             Character_Health_Manager.health.HealthManagement(1);
         }
     }
