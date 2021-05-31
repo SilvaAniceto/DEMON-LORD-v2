@@ -57,7 +57,7 @@ public class Character_Combat : MonoBehaviour {
                     isAttacking = false;
                     upperBody.enabled = false;
                     Character_Animation_Manager.animInstance.ChangeAnimationState(ROLLING);
-                    rb.AddForce(Character_Moviment.moveInstance.facingSide * 25f, ForceMode2D.Impulse);
+                    rb.AddForce(Character_Moviment.moveInstance.facingSide * 20f, ForceMode2D.Impulse);
                 }
             }
         }

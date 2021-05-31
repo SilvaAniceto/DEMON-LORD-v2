@@ -14,6 +14,7 @@ public class Character_Health_Manager : MonoBehaviour
     const string DEATH = "Death";
     const string BLOCKED = "Blocked";
 
+    Rigidbody2D rb;
 
     void Awake()
     {
@@ -22,6 +23,7 @@ public class Character_Health_Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
     }
 
@@ -38,6 +40,7 @@ public class Character_Health_Manager : MonoBehaviour
             isHit = true;
             if (currentHealth > 0) {
                 Character_Animation_Manager.animInstance.ChangeAnimationState(HIT);
+                rb.AddForce(new Vector2(10 * -Character_Moviment.moveInstance.facingSide.x, 5), ForceMode2D.Impulse);
                 currentHealth -= damage;
             }
             else if (currentHealth <= 0) {

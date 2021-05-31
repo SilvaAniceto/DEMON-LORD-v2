@@ -59,10 +59,10 @@ public class Slime_Behaviour : MonoBehaviour {
         transform.Rotate(0, 180, 0);
     }
 
-    void OnDrawGizmos() {
-        Gizmos.DrawLine(checkEdges.position, new Vector3(checkEdges.position.x, checkEdges.position.y - groundRaySize, checkEdges.position.z));
-        Gizmos.DrawLine(checkEdges.position, new Vector3(checkEdges.position.x + groundRaySize, checkEdges.position.y, checkEdges.position.z));
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+    void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.tag == "Player") {
+            Character_Health_Manager.health.HealthManagement(1);
+        }
     }
 
     public void AttackDamage() {
@@ -70,5 +70,11 @@ public class Slime_Behaviour : MonoBehaviour {
         if (hit != null) {
             Character_Health_Manager.health.HealthManagement(1);
         }
+    }
+
+    void OnDrawGizmos() {
+        Gizmos.DrawLine(checkEdges.position, new Vector3(checkEdges.position.x, checkEdges.position.y - groundRaySize, checkEdges.position.z));
+        Gizmos.DrawLine(checkEdges.position, new Vector3(checkEdges.position.x + groundRaySize, checkEdges.position.y, checkEdges.position.z));
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }
