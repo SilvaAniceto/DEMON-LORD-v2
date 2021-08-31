@@ -5,19 +5,20 @@ using UnityEngine;
 public class Character_Combat : MonoBehaviour {
     public static Character_Combat combInstance;
 
-    public bool canAttack;
-    public bool isAttacking;
-    public CapsuleCollider2D upperBody;
+    [HideInInspector] public bool canAttack;
+    [HideInInspector] public bool isAttacking;
     [SerializeField] float attackRange;
     [SerializeField] Transform attackPoint;
     [SerializeField] LayerMask whatIsEnemy;
+    public CapsuleCollider2D upperBody;
 
-    public bool isBlocking;
-    public bool isRolling;
+    [HideInInspector] public bool isBlocking;
+    [HideInInspector] public bool isRolling;
 
     const string ATTACK_A = "Attack A";
     const string BLOCKING = "Blocking";
     const string ROLLING = "Rolling";
+    const string DODGE = "Dodge";
 
     Rigidbody2D rb;
 
@@ -56,8 +57,16 @@ public class Character_Combat : MonoBehaviour {
                     isRolling = true;
                     isAttacking = false;
                     upperBody.enabled = false;
-                    Character_Animation_Manager.animInstance.ChangeAnimationState(ROLLING);
-                    rb.AddForce(Character_Moviment.moveInstance.facingSide * 20f, ForceMode2D.Impulse);
+                    if (Character_Moviment.moveInstance.moveInput != 0)
+                    {
+                        Character_Animation_Manager.animInstance.ChangeAnimationState(ROLLING);
+                        rb.AddForce(Character_Moviment.moveInstance.facingSide * 18f, ForceMode2D.Impulse);
+                    }
+                    else
+                    {
+                        Character_Animation_Manager.animInstance.ChangeAnimationState(DODGE);
+                        rb.AddForce(new Vector2(10 * -Character_Moviment.moveInstance.facingSide.x, 10), ForceMode2D.Impulse);
+                    }
                 }
             }
         }

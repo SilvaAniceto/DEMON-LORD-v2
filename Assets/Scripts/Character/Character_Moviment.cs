@@ -10,15 +10,16 @@ public class Character_Moviment : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float maxMoveAngle = 45f;
     [HideInInspector] public float moveInput;
+    [HideInInspector] public Vector2 facingSide = new Vector2(1, 0);
     float groundAngle;
     bool isFlip = false;
     Vector2 moveDirection;
-    public Vector2 facingSide = new Vector2(1, 0);
 
     [Header("Jump")]
     [SerializeField] float jumpForce;
     [SerializeField] float groundRaySize;
     [SerializeField] LayerMask whatIsGround;
+    [SerializeField] Vector3 groundRayOffset;
     [HideInInspector] public bool grounded;
 
     [Header("Wall Jump")]
@@ -44,14 +45,15 @@ public class Character_Moviment : MonoBehaviour
 
         CheckRayCasts();
 
-        if (!Character_Combat.combInstance.isAttacking && !Character_Combat.combInstance.isBlocking && !Character_Combat.combInstance.isRolling && !Character_Health_Manager.health.isHit)
+        if (!Character_Combat.combInstance.isAttacking && !Character_Combat.combInstance.isBlocking &&
+            !Character_Combat.combInstance.isRolling && !Character_Health_Manager.health.isHit)
         {
             if (moveInput != 0 && !wallSliding)
                 Move();
-
             if (Input.GetButtonDown("Jump") && grounded && !wallSliding)
                 Jump();
         }
+        
 
         if (Input.GetButtonDown("Jump") && !grounded && wallSliding)
             WallJump();
@@ -72,6 +74,8 @@ public class Character_Moviment : MonoBehaviour
 
         RaycastHit2D hitWall = Physics2D.Raycast(transform.position, facingSide, wallRaySize, whatIsWall);
 
+        grounded = Physics2D.Raycast(transform.position + groundRayOffset, Vector2.down, groundRaySize, whatIsGround) || Physics2D.Raycast(transform.position - groundRayOffset, Vector2.down, groundRaySize, whatIsGround);
+
         if (hitWall.collider != null && !grounded && rb.velocity.y < slideSpeed)
         {
             wallSliding = true;
@@ -82,14 +86,11 @@ public class Character_Moviment : MonoBehaviour
 
         if (hitGround.collider != null)
         {
-            grounded = true;
             if (moveInput >= 0)
                 moveDirection = new Vector2(hitGround.normal.y, -hitGround.normal.x);
             else
                 moveDirection = new Vector2(hitGround.normal.y, hitGround.normal.x);
         }
-        else
-            grounded = false;
     }
     void Move()
     {
@@ -122,6 +123,7 @@ public class Character_Moviment : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position, new Vector3(transform.position.x + wallRaySize * facingSide.x, transform.position.y, transform.position.z));
-        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y - groundRaySize, transform.position.z));
+        Gizmos.DrawLine(transform.position + groundRayOffset, new Vector3(transform.position.x + groundRayOffset.x, transform.position.y - groundRaySize, transform.position.z));
+        Gizmos.DrawLine(transform.position - groundRayOffset, new Vector3(transform.position.x - groundRayOffset.x, transform.position.y - groundRaySize, transform.position.z));
     }
 }

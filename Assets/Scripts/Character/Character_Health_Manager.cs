@@ -26,21 +26,14 @@ public class Character_Health_Manager : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void HealthManagement(float damage) {
+    public void HealthManagement(float damage, int throwDir) {
         if (Character_Combat.combInstance.isBlocking)
             Character_Animation_Manager.animInstance.ChangeAnimationState(BLOCKED);
         else {
             isHit = true;
             if (currentHealth > 0) {
                 Character_Animation_Manager.animInstance.ChangeAnimationState(HIT);
-                rb.AddForce(new Vector2(10 * -Character_Moviment.moveInstance.facingSide.x, 5), ForceMode2D.Impulse);
+                rb.AddForce(new Vector2(6 * throwDir, 5), ForceMode2D.Impulse);
                 currentHealth -= damage;
             }
             else if (currentHealth <= 0) {
@@ -50,6 +43,7 @@ public class Character_Health_Manager : MonoBehaviour
     }
 
     void Death() {
+        rb.velocity = new Vector2(0, rb.velocity.y);
         Character_Animation_Manager.animInstance.ChangeAnimationState(DEATH);
         this.enabled = false;
         Physics2D.IgnoreLayerCollision(3, 8, true);

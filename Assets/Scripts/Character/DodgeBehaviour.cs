@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitBehaviour : StateMachineBehaviour
+public class DodgeBehaviour : StateMachineBehaviour
 {
-    /*float timer;
+    float timer;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -18,15 +18,16 @@ public class HitBehaviour : StateMachineBehaviour
 
         if (timer <= 0)
         {
-            Character_Health_Manager.health.isHit = false;
+            Character_Combat.combInstance.isRolling = false;
+            Character_Combat.combInstance.upperBody.enabled = true;
         }
-    }*/
+    }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        Character_Health_Manager.health.isHit = false;
-    }
+    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    
+    //}
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

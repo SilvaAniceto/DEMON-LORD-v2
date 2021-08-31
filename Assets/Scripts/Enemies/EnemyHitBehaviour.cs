@@ -2,30 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitBehaviour : StateMachineBehaviour
+public class EnemyHitBehaviour : StateMachineBehaviour
 {
-    /*float timer;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        timer = stateInfo.length;
-    }
+    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    
+    //}
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        timer -= Time.deltaTime;
-
-        if (timer <= 0)
-        {
-            Character_Health_Manager.health.isHit = false;
-        }
-    }*/
+    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    
+    //}
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Character_Health_Manager.health.isHit = false;
+        Enemy_Health_Manager.enemyHealth.isHit = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

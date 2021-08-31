@@ -15,17 +15,18 @@ public class Enemy_Health_Manager : MonoBehaviour {
     Animator anim;
 
     void Awake() {
-        anim = GetComponent<Animator>();
         enemyHealth = this;
+        anim = GetComponent<Animator>();
     }
     // Start is called before the first frame update
     void Start() {
         currentHealth = maxHealth;
+        isHit = false;
     }
 
     public void EnemyHealthManagement(float damage) {
         isHit = true;
-        if (currentHealth > 0) {
+        if (currentHealth > 0) {            
             anim.Play(HIT);
             currentHealth -= damage;
         }

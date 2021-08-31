@@ -7,6 +7,7 @@ public class Slime_Behaviour : MonoBehaviour {
 
     [SerializeField] float movespeed;
     [SerializeField] float groundRaySize;
+    [SerializeField] float wallCircle;
     [SerializeField] Transform checkEdges;
     [SerializeField] LayerMask whatIsGround;
     [SerializeField] LayerMask whatIsWall;
@@ -15,11 +16,12 @@ public class Slime_Behaviour : MonoBehaviour {
     [SerializeField] LayerMask whatIsPlayer;
     [HideInInspector] public bool isAttacking;
     float attackTimer;
+    int attackDir = 1;
 
     Rigidbody2D rb;
     Animator animator;
     RaycastHit2D hitGround;
-    RaycastHit2D hitWall;
+    Collider2D hitWall;
 
     void Awake() {
         slimeMov = this;
@@ -34,12 +36,11 @@ public class Slime_Behaviour : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         hitGround = Physics2D.Raycast(checkEdges.position, Vector2.down, groundRaySize, whatIsGround);
-        hitWall = Physics2D.Raycast(checkEdges.position, Vector2.right, groundRaySize, whatIsWall);
+        hitWall = Physics2D.OverlapCircle(checkEdges.position, wallCircle, whatIsWall);
         attackTimer -= Time.deltaTime;
 
-        if (hitWall.collider != null)
+        if (hitWall != null)
             Flip();
-
 
         if (attackTimer <= 0) {
             rb.velocity = Vector2.zero;
@@ -47,7 +48,7 @@ public class Slime_Behaviour : MonoBehaviour {
             attackTimer = Random.Range(2, 5);
         }
         else {
-            if (hitGround.collider != null && !Enemy_Health_Manager.enemyHealth.isHit)
+            if (hitGround.collider != null && Enemy_Health_Manager.enemyHealth.isHit == false)
                 rb.velocity = new Vector2(movespeed, rb.velocity.y);
             else if (hitGround.collider == null)
                 Flip();
@@ -55,6 +56,7 @@ public class Slime_Behaviour : MonoBehaviour {
     }
 
     void Flip() {
+        attackDir *= -1;
         movespeed *= -1;
         transform.Rotate(0, 180, 0);
     }
@@ -62,19 +64,19 @@ public class Slime_Behaviour : MonoBehaviour {
     public void AttackDamage() {
         Collider2D hit = Physics2D.OverlapCircle(transform.position, attackRange, whatIsPlayer);
         if (hit != null) {
-            Character_Health_Manager.health.HealthManagement(1);
+            Character_Health_Manager.health.HealthManagement(1, attackDir);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "Player") {
-            Character_Health_Manager.health.HealthManagement(1);
+            Character_Health_Manager.health.HealthManagement(1, attackDir);
         }
     }
 
     void OnDrawGizmos() {
         Gizmos.DrawLine(checkEdges.position, new Vector3(checkEdges.position.x, checkEdges.position.y - groundRaySize, checkEdges.position.z));
-        Gizmos.DrawLine(checkEdges.position, new Vector3(checkEdges.position.x + groundRaySize, checkEdges.position.y, checkEdges.position.z));
+        Gizmos.DrawWireSphere(checkEdges.position, wallCircle);
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }
